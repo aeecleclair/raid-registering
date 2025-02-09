@@ -27,7 +27,7 @@ import {
   TableHeader,
   TableRow,
 } from "../../ui/table";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { TeamPreview } from "@/src/api/hyperionSchemas";
 import { toast } from "../../ui/use-toast";
 
@@ -48,6 +48,7 @@ export function DataTable<TData, TValue>({
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const table = useReactTable({
     data,
@@ -84,8 +85,25 @@ export function DataTable<TData, TValue>({
       return;
     }
     const id = (row.original as TeamPreview).id;
-    router.replace(`/admin/teams?teamId=${id}`);
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    current.set("teamId", id);
+    const query = current.toString();
+    router.replace(`/admin/teams?${query}`);
   }
+
+  React.useEffect(() => {
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    const page = current.get("page");
+    if (page) {
+      let index = Number(page);
+      if (index < 0) {
+        index = 0;
+      } else if (index > table.getPageCount()) {
+        index = table.getPageCount() - 1;
+      }
+      table.setPageIndex(index);
+    }
+  }, [searchParams, table]);
 
   return (
     <div className="space-y-4">

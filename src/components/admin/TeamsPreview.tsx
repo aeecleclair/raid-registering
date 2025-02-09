@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
-import { Badge } from "@/src/components/ui/badge";
 import { Button } from "@/src/components/ui/button";
 import {
   Card,
@@ -20,8 +19,7 @@ import {
 } from "@/src/components/ui/table";
 import { Skeleton } from "../ui/skeleton";
 import { TeamPreview } from "@/src/api/hyperionSchemas";
-import { CircularProgressBar } from "../custom/CircularProgressBar";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ProgressBadge } from "../custom/ProgressBadge";
 
 interface TeamsPreviewProps {
@@ -31,9 +29,13 @@ interface TeamsPreviewProps {
 
 export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   function onTeamClick(teamId: string) {
-    router.push("/admin/teams?teamId=" + teamId);
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    current.set("teamId", teamId);
+    const query = current.toString();
+    router.replace(`/admin/teams?${query}`);
   }
 
   return (
