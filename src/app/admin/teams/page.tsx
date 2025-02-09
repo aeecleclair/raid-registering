@@ -38,7 +38,10 @@ const Dashboard = () => {
 
   function handleModalClose() {
     setIsOpened(false);
-    router.replace("/admin/teams");
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    current.delete("teamId");
+    const query = current.toString();
+    router.replace(`/admin/teams?${query}`);
     setTeamId(null);
   }
 
