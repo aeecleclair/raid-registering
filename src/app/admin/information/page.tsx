@@ -7,7 +7,7 @@ import { EmergencyPerson } from "@/src/components/admin/information/EmergencyPer
 import { InscriptionEnd } from "@/src/components/admin/information/InscriptionEnd";
 import { RaidDate } from "@/src/components/admin/information/RaidDate";
 import { RaidInformationDocument } from "@/src/components/admin/information/RaidInformationDocument";
-import { RaidPrice } from "@/src/components/admin/information/RaidPrice";
+import { RaidStudentPrice } from "@/src/components/admin/information/RaidStudentPrice";
 import { RaidRules } from "@/src/components/admin/information/RaidRules";
 import { TShirtPrice } from "@/src/components/admin/information/TShirtPrice";
 import {
@@ -26,6 +26,7 @@ import {
   AccordionTrigger,
 } from "@/src/components/ui/accordion";
 import { PaymentLink } from "@/src/components/admin/information/PayementLink";
+import { RaidExternalPrice } from "@/src/components/admin/information/RaidExternalPrice";
 
 const InformationPage = () => {
   const { isAdmin } = useUser();
@@ -64,9 +65,10 @@ const InformationPage = () => {
                 <AccordionTrigger>Prix</AccordionTrigger>
                 <AccordionContent>
                   <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full grid-cols-1 max-md:p-8 max-md:gap-4">
-                    {/* <RaidPrice />
-                    <TShirtPrice /> */}
-                    <PaymentLink />
+                    <RaidStudentPrice />
+                    <RaidExternalPrice />
+                    <TShirtPrice />
+                    {/* <PaymentLink /> */}
                   </div>
                 </AccordionContent>
               </AccordionItem>

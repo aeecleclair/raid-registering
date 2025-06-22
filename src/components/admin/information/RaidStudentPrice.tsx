@@ -15,7 +15,7 @@ import { usePrice } from "@/src/hooks/usePrice";
 import { LoadingButton } from "../../custom/LoadingButton";
 import { PriceInput } from "../../ui/PriceInput";
 
-export const RaidPrice = () => {
+export const RaidStudentPrice = () => {
   const { price, updatePrice } = usePrice();
   const [isEdit, setIsEdit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +55,7 @@ export const RaidPrice = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <CardLayout label="Prix du Raid">
+        <CardLayout label="Tarif étudiant">
           {isEdit ? (
             <>
               <FormField
