@@ -29,8 +29,8 @@ export const ParticipantCard = ({
   participant,
   isCaptain,
 }: ParticipantCardProps) => {
-  // const { price } = usePrice();
-  const { information } = useInformation();
+  const { price } = usePrice();
+  // const { information } = useInformation();
   const [isEdit, setIsEdit] = useState(false);
 
   function toggleEdit() {
@@ -99,25 +99,8 @@ export const ParticipantCard = ({
                   Paiement
                 </span>
                 {/* When paying by HelloAsso */}
-                {/* {(!participant?.payment ||
-                  (participant.t_shirt_size && !participant.t_shirt_payment)) &&
-                getSituationLabel(participant?.situation ?? undefined) !==
-                  "corporatepartner" &&
-                !!price?.student_price &&
-                !!price?.t_shirt_price ? (
-                  <PaymentButton />
-                ) : (
-                  <Checkbox
-                    checked={participant?.payment}
-                    disabled
-                    className="col-span-4 ml-auto disabled:opacity-100"
-                  />
-                )} */}
-                {!participant?.payment &&
-                getSituationLabel(participant?.situation ?? undefined) !==
-                  "corporatepartner" ? (
-                  <>
-                    {information?.payment_link ? (
+                {/* 
+                    {/* {information?.payment_link ? (
                       <Button
                         className="col-span-4 ml-auto w-[100px]"
                         onClick={() => {
@@ -125,7 +108,20 @@ export const ParticipantCard = ({
                         }}
                       >
                         {"Payer"}
-                      </Button>
+                      </Button> */}
+                {!participant?.payment &&
+                getSituationLabel(participant?.situation ?? undefined) !==
+                  "corporatepartner" ? (
+                  <>
+                    {(!participant?.payment ||
+                      (participant.t_shirt_size &&
+                        !participant.t_shirt_payment)) &&
+                    getSituationLabel(participant?.situation ?? undefined) !==
+                      "corporatepartner" &&
+                    !!price?.student_price &&
+                    !!price?.external_price &&
+                    !!price?.t_shirt_price ? (
+                      <PaymentButton />
                     ) : (
                       <span>{"Aucun lien"}</span>
                     )}

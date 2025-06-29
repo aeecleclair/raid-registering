@@ -212,7 +212,7 @@ export const ParticipantInfo = ({
                 <Button variant={null} className="col-span-4 px-4 bg-zinc-200 ">
                   <div className="flex flex-row items-start w-full">
                     <span className="text-gray-500 overflow-hidden">
-                      {"Fiche sécurité" ?? "Aucun fichier séléctionné"}
+                      {"Fiche sécurité"}
                     </span>
                   </div>
                 </Button>

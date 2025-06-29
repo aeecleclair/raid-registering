@@ -7,6 +7,12 @@ import { useParticipant } from "@/src/hooks/useParticipant";
 import { usePrice } from "@/src/hooks/usePrice";
 import { Separator } from "../../ui/separator";
 import { HelloAssoButton } from "../../custom/HelloAssoButton";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+  TooltipProvider,
+} from "@/src/components/ui/tooltip";
 
 export const PaymentButton = () => {
   const { me } = useParticipant();
@@ -18,6 +24,8 @@ export const PaymentButton = () => {
     router.push(paymentUrl.url);
   }
   const mustPayRegistering = !me?.payment;
+  const shouldEnableButton = !me?.payment && me?.validation_progress === 100;
+  const isStudent = me?.student_card?.validation === "accepted";
   const mustPayTShirt = me?.t_shirt_size && !me?.t_shirt_payment;
   return (
     <>
@@ -33,7 +41,12 @@ export const PaymentButton = () => {
               {mustPayRegistering && (
                 <div className="flex justify-between">
                   <span>Participation</span>
-                  <span>{price?.student_price! / 100} €</span>
+                  <span>
+                    {(isStudent
+                      ? price?.student_price!
+                      : price?.external_price!) / 100}{" "}
+                    €
+                  </span>
                 </div>
               )}
               {mustPayTShirt && (
@@ -48,7 +61,12 @@ export const PaymentButton = () => {
                   <div className="flex justify-between">
                     <span>Total</span>
                     <span>
-                      {(price?.student_price! + price?.t_shirt_price!) / 100} €
+                      {((isStudent
+                        ? price?.student_price!
+                        : price?.external_price!) +
+                        price?.t_shirt_price!) /
+                        100}{" "}
+                      €
                     </span>
                   </div>
                 </>
@@ -70,14 +88,26 @@ export const PaymentButton = () => {
           <HelloAssoButton isLoading={isLoading} onClick={() => refetchUrl()} />
         }
       />
-      <Button
-        className="col-span-4 ml-auto w-[100px]"
-        onClick={(_) => {
-          setIsOpened(true);
-        }}
-      >
-        Payer
-      </Button>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>
+            <Button
+              className="col-span-4 ml-auto w-[100px]"
+              disabled={!shouldEnableButton}
+              onClick={(_) => {
+                setIsOpened(true);
+              }}
+            >
+              Payer
+            </Button>
+          </TooltipTrigger>
+          {!shouldEnableButton && (
+            <TooltipContent>
+              <p>Votre dossier n&apos;est pas complet ou totalement validé</p>
+            </TooltipContent>
+          )}
+        </Tooltip>
+      </TooltipProvider>
     </>
   );
 };
