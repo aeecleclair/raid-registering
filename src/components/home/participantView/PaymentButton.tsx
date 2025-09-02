@@ -24,7 +24,6 @@ export const PaymentButton = () => {
     router.push(paymentUrl.url);
   }
   const mustPayRegistering = !me?.payment;
-  const shouldEnableButton = !me?.payment && me?.validation_progress === 100;
   const isStudent = me?.student_card?.validation === "accepted";
   const mustPayTShirt = me?.t_shirt_size && !me?.t_shirt_payment;
   return (
@@ -93,7 +92,7 @@ export const PaymentButton = () => {
           <TooltipTrigger>
             <Button
               className="col-span-4 ml-auto w-[100px]"
-              disabled={!shouldEnableButton}
+              disabled={!mustPayRegistering}
               onClick={(_) => {
                 setIsOpened(true);
               }}
@@ -101,7 +100,7 @@ export const PaymentButton = () => {
               Payer
             </Button>
           </TooltipTrigger>
-          {!shouldEnableButton && (
+          {!mustPayRegistering && (
             <TooltipContent>
               <p>Votre dossier n&apos;est pas complet ou totalement validé</p>
             </TooltipContent>
