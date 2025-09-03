@@ -113,7 +113,7 @@ export const ParticipantCard = ({
                 getSituationLabel(participant?.situation ?? undefined) !==
                   "corporatepartner" ? (
                   <>
-                    {/* {(!participant?.payment ||
+                    {(!participant?.payment ||
                       (participant.t_shirt_size &&
                         !participant.t_shirt_payment)) &&
                     getSituationLabel(participant?.situation ?? undefined) !==
@@ -124,8 +124,7 @@ export const ParticipantCard = ({
                       <PaymentButton />
                     ) : (
                       <span>{"Aucun lien"}</span>
-                    )} */}
-                    <span>{"Aucun lien pour l'instant"}</span>
+                    )}
                   </>
                 ) : (
                   <Checkbox
