@@ -19,15 +19,50 @@ export const PaymentButton = () => {
   const { price } = usePrice();
   const { paymentUrl, isLoading, refetchUrl } = usePaymentUrl();
   const [isOpened, setIsOpened] = useState(false);
+  const [isStudentWarningOpened, setIsStudentWarningOpened] = useState(false);
   const router = useRouter();
   if (!isLoading && !!paymentUrl) {
     router.push(paymentUrl.url);
   }
   const mustPayRegistering = !me?.payment;
   const isStudent = me?.student_card?.validation === "accepted";
+  const isNotValidatedStudent =
+    me?.student_card?.id !== undefined &&
+    me?.student_card?.validation !== "accepted";
   const mustPayTShirt = me?.t_shirt_size && !me?.t_shirt_payment;
+
   return (
     <>
+      <WarningDialog
+        isOpened={isStudentWarningOpened}
+        setIsOpened={setIsStudentWarningOpened}
+        isLoading={isLoading}
+        title="Payer l'inscription"
+        description={
+          <>
+            <div className="mt-6 mb-2 font-semibold">
+              Votre carte étudiante n'est pas encore validée !
+            </div>
+            <p>
+              Votre carte étudiante n&apos;est pas encore validée, si vous
+              procédez au paiement maintenant, vous payerez le tarif étudiant.
+              Cependant, si votre carte est finalement refusée, il vous faudra
+              repayer la différence entre le tarif étudiant et le tarif externe.
+            </p>
+          </>
+        }
+        customButton={
+          <Button
+            className="col-span-4 ml-auto w-[100px]"
+            disabled={!mustPayRegistering}
+            variant="default"
+            onClick={(_) => {
+              setIsOpened(true);
+              setIsStudentWarningOpened(false);
+            }}
+          />
+        }
+      />
       <WarningDialog
         isOpened={isOpened}
         setIsOpened={setIsOpened}
@@ -93,8 +128,13 @@ export const PaymentButton = () => {
             <Button
               className="col-span-4 ml-auto w-[100px]"
               disabled={!mustPayRegistering}
+              variant={isNotValidatedStudent ? "destructive" : "default"}
               onClick={(_) => {
-                setIsOpened(true);
+                if (isNotValidatedStudent) {
+                  setIsStudentWarningOpened(true);
+                } else {
+                  setIsOpened(true);
+                }
               }}
             >
               Payer
@@ -102,7 +142,7 @@ export const PaymentButton = () => {
           </TooltipTrigger>
           {!mustPayRegistering && (
             <TooltipContent>
-              <p>Votre dossier n&apos;est pas complet ou totalement validé</p>
+              <p>Votre dossier est totalement validé !</p>
             </TooltipContent>
           )}
         </Tooltip>
