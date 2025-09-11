@@ -9,7 +9,7 @@ export const TopBar = () => {
           href="#"
           className="flex items-center gap-2 font-semibold md:text-base"
         >
-          <span className=" text-2xl">Inscription Raid 2024</span>
+          <span className=" text-2xl">Inscription Raid {new Date().getFullYear()}</span>
         </Link>
         <div className="flex flex-row ml-auto">
           <UserButton />
