@@ -41,7 +41,7 @@ export const PaymentButton = () => {
         description={
           <>
             <div className="mt-6 mb-2 font-semibold">
-              Votre carte étudiante n'est pas encore validée !
+              Votre carte étudiante n&apos;est pas encore validée !
             </div>
             <p>
               Votre carte étudiante n&apos;est pas encore validée, si vous
