@@ -36,13 +36,13 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <title>Challenger</title>
+        <title>Inscription Raid</title>
         <link rel="shortcut icon" href="/favicon.ico" />
       </head>
 
       <Script
         defer
-        data-domain="preprod-challenger.myecl.fr"
+        data-domain="inscription-raid.myecl.fr"
         src="https://plausible.eclair.ec-lyon.fr/js/script.js"
         strategy="lazyOnload"
       />
