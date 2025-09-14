@@ -41,7 +41,6 @@ const Login = () => {
               let redirectUri =
                 process.env.NEXT_PUBLIC_BACKEND_URL +
                 "/calypsso/register?external=true";
-
               router.push(redirectUri);
             }}
           >
@@ -49,7 +48,7 @@ const Login = () => {
           </Button>
           <Button
             variant="link"
-            onClick={() => () => {
+            onClick={() => {
               let redirectUri =
                 process.env.NEXT_PUBLIC_BACKEND_URL + "/calypsso/recover/";
               router.push(redirectUri);
