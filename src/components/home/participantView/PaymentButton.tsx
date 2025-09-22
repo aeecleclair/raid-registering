@@ -29,7 +29,8 @@ export const PaymentButton = () => {
   const isNotValidatedStudent =
     me?.student_card?.id !== undefined &&
     me?.student_card?.validation !== "accepted";
-  const mustPayTShirt = me?.t_shirt_size && !me?.t_shirt_payment;
+  const mustPayTShirt =
+    me?.t_shirt_size && !me?.t_shirt_payment && me?.t_shirt_size !== "None";
 
   return (
     <>
@@ -55,7 +56,6 @@ export const PaymentButton = () => {
           <Button
             className="col-span-4 ml-auto w-[100px]"
             disabled={!mustPayRegistering}
-            variant="default"
             onClick={(_) => {
               setIsOpened(true);
               setIsStudentWarningOpened(false);
