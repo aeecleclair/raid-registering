@@ -13,6 +13,7 @@ import {
   TooltipTrigger,
   TooltipProvider,
 } from "@/src/components/ui/tooltip";
+import { getSituationLabel } from "@/src/infra/teamUtils";
 
 export const PaymentButton = () => {
   const { me } = useParticipant();
@@ -25,8 +26,14 @@ export const PaymentButton = () => {
     router.push(paymentUrl.url);
   }
   const mustPayRegistering = !me?.payment;
-  const isStudent = me?.student_card?.validation === "accepted";
+  const isStudent =
+    ["centrale", "otherschool"].includes(
+      getSituationLabel(me?.situation || undefined) || "",
+    ) && me?.student_card?.validation === "accepted";
   const isNotValidatedStudent =
+    ["centrale", "otherschool"].includes(
+      getSituationLabel(me?.situation || undefined) || "",
+    ) &&
     me?.student_card?.id !== undefined &&
     me?.student_card?.validation !== "accepted";
   const mustPayTShirt =
