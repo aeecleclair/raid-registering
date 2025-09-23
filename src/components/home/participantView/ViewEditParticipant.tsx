@@ -250,19 +250,26 @@ export const ViewEditParticipant = ({
       attestation_on_honour: values.attestationHonour,
     };
     for (const doc of documentToUpdate) {
+      
       switch (doc.type) {
         case "idCard":
-          updatedParticipant["id_card_id"] = doc.id;
+          updatedParticipant.id_card_id = doc.id;
+          break;
         case "medicalCertificate":
-          updatedParticipant["medical_certificate_id"] = doc.id;
+          updatedParticipant.medical_certificate_id = doc.id;
+          break;
         case "studentCard":
-          updatedParticipant["student_card_id"] = doc.id;
+          updatedParticipant.student_card_id = doc.id;
+          break;
         case "raidRules":
-          updatedParticipant["raid_rules_id"] = doc.id;
+          updatedParticipant.raid_rules_id = doc.id;
+          break;
         case "parentAuthorization":
-          updatedParticipant["parent_authorization_id"] = doc.id;
+          updatedParticipant.parent_authorization_id = doc.id;
+          break;
       }
     }
+
     updateParticipant(updatedParticipant, participant.id, () => {
       toast({
         title: "Profil mis à jour",
