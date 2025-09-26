@@ -1,10 +1,8 @@
 import { useGetRaidSecurityFilesZip } from "@/src/api/hyperionComponents";
 import { useAuth } from "./useAuth";
-import { useUser } from "./useUser";
 
 export const useSecurityFiles = () => {
-  const { token, isTokenExpired } = useAuth();
-  const { isAdmin } = useUser();
+  const { token } = useAuth();
 
   const { refetch, isLoading } = useGetRaidSecurityFilesZip<File>(
     {
@@ -13,7 +11,7 @@ export const useSecurityFiles = () => {
       },
     },
     {
-      enabled: token !== null && !isTokenExpired() && isAdmin(),
+      enabled: false,
       retry: 0,
     },
   );
