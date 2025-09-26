@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowUpRight, DownloadIcon } from "lucide-react";
+import { ArrowUpRight, DownloadIcon, LifeBuoyIcon } from "lucide-react";
+import { UsersIcon, ShieldIcon } from "lucide-react";
 
 import { Button } from "@/src/components/ui/button";
 import {
@@ -36,6 +37,19 @@ interface TeamsPreviewProps {
 }
 
 export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
+  function downloadBlob(blob: Blob, prefix: string) {
+    const now = new Date();
+    const pad = (n: number) => n.toString().padStart(2, "0");
+    const formatted = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}_${pad(now.getHours())}_${pad(now.getMinutes())}_${pad(now.getSeconds())}`;
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${prefix}_${formatted}.zip`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.URL.revokeObjectURL(url);
+  }
   const router = useRouter();
   const searchParams = useSearchParams();
   const { refetchTeamFiles, isLoading: isTeamFilesLoading } = useTeamFiles();
@@ -63,8 +77,8 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button size="sm" variant="outline" className="gap-1">
-                <DownloadIcon className="h-4 w-4" />
-                Télécharger
+                <DownloadIcon className="h-4 w-4 mr-1" />
+                Documents
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -74,18 +88,12 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
                   refetchTeamFiles().then((response) => {
                     const teamFiles = response.data;
                     if (teamFiles instanceof Blob) {
-                      const url = window.URL.createObjectURL(teamFiles);
-                      const a = document.createElement("a");
-                      a.href = url;
-                      a.download = teamFiles.name;
-                      document.body.appendChild(a);
-                      a.click();
-                      a.remove();
-                      window.URL.revokeObjectURL(url);
+                      downloadBlob(teamFiles, "Dossiers_Equipes");
                     }
                   });
                 }}
               >
+                <UsersIcon className="mr-2 h-4 w-4 " />
                 Fichiers équipes
               </DropdownMenuItem>
               <DropdownMenuItem
@@ -94,18 +102,12 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
                   refetchSecurityFiles().then((response) => {
                     const securityFiles = response.data;
                     if (securityFiles instanceof Blob) {
-                      const url = window.URL.createObjectURL(securityFiles);
-                      const a = document.createElement("a");
-                      a.href = url;
-                      a.download = securityFiles.name;
-                      document.body.appendChild(a);
-                      a.click();
-                      a.remove();
-                      window.URL.revokeObjectURL(url);
+                      downloadBlob(securityFiles, "Fiches_Sécurités");
                     }
                   });
                 }}
               >
+                <LifeBuoyIcon className="mr-2 h-4 w-4 " />
                 Fiches sécurité
               </DropdownMenuItem>
             </DropdownMenuContent>
