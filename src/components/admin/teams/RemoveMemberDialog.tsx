@@ -7,7 +7,10 @@ import {
 } from "../../ui/dialog";
 import { Button } from "../../ui/button";
 import { LoadingButton } from "../../custom/LoadingButton";
-import { ParticipantPreview, TeamPreview } from "@/src/api/hyperionSchemas";
+import {
+  RaidParticipantPreview,
+  RaidTeamPreview,
+} from "@/src/api/hyperionSchemas";
 import { Card, CardContent } from "../../ui/card";
 import { useState } from "react";
 
@@ -16,15 +19,15 @@ interface RemoveMemberDialogProps {
   setIsOpened: (value: boolean) => void;
   isLoading: boolean;
   title: string;
-  team: TeamPreview;
+  team: RaidTeamPreview;
   validateLabel: string;
   callback: (participantId: string) => void;
 }
 
 const RemoveParticipantCard = (
-  participant: ParticipantPreview,
-  selectedMember: ParticipantPreview | null,
-  setSelectedMember: (value: ParticipantPreview | null) => void,
+  participant: RaidParticipantPreview,
+  selectedMember: RaidParticipantPreview | null,
+  setSelectedMember: (value: RaidParticipantPreview | null) => void,
 ) => {
   return (
     <Card
@@ -54,7 +57,7 @@ export const RemoveMemberDialog = ({
   callback,
 }: RemoveMemberDialogProps) => {
   const [selectedMember, setSelectedMember] =
-    useState<ParticipantPreview | null>(null);
+    useState<RaidParticipantPreview | null>(null);
 
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();

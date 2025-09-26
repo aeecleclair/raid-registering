@@ -1,6 +1,5 @@
 import { EditUserInfoField } from "./EditUserInfoField";
 import { addYears, toDate } from "date-fns";
-import { fr } from "date-fns/locale";
 import PhoneInput from "react-phone-input-2";
 import { Label } from "../../ui/label";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,7 +8,11 @@ import { z } from "zod";
 import { DatePicker } from "../../custom/DatePicker";
 import { FormField, FormItem, FormLabel, FormMessage } from "../../ui/form";
 import { UserInfoView } from "./UserInfoView";
-import { Participant, ParticipantUpdate } from "@/src/api/hyperionSchemas";
+import {
+  Participant,
+  RaidParticipant,
+  RaidParticipantUpdate,
+} from "@/src/api/hyperionSchemas";
 import { Button } from "../../ui/button";
 import { SheetFooter } from "../../ui/sheet";
 import { HiPencil, HiCheck, HiX } from "react-icons/hi";
@@ -20,7 +23,7 @@ import { apiFormatDate, formatDate } from "@/src/utils/dateFormat";
 import { useTeam } from "@/src/hooks/useTeam";
 
 interface UserButtonProps {
-  me: Participant;
+  me: RaidParticipant;
   isEdit: boolean;
   setIsEdit: (value: boolean) => void;
   setIsOpen: (value: boolean) => void;
@@ -89,7 +92,7 @@ export const ViewEditUserInfo = ({
       return;
     }
     const dateString = apiFormatDate(values.birthday);
-    const updatedParticipant: ParticipantUpdate = {
+    const updatedParticipant: RaidParticipantUpdate = {
       ...values,
       birthday: dateString,
     };

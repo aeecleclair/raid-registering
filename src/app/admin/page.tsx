@@ -7,7 +7,7 @@ import { StatsView } from "@/src/components/admin/StatsView";
 import { useUser } from "@/src/hooks/useUser";
 import { useRouter } from "next/navigation";
 import { useTeams } from "@/src/hooks/useTeams";
-import { Participant } from "@/src/api/hyperionSchemas";
+import { RaidParticipant } from "@/src/api/hyperionSchemas";
 import { formatDate, getDaysLeft } from "@/src/utils/dateFormat";
 import { useInformation } from "@/src/hooks/useInformation";
 
@@ -23,7 +23,8 @@ const Dashboard = () => {
     (teams
       ?.map((team) => [team.captain, team.second])
       .flat(1)
-      .filter((participant) => participant !== null) as Participant[]) ?? [];
+      .filter((participant) => participant !== null) as RaidParticipant[]) ??
+    [];
 
   const allPayments = allParticipants
     ?.map((participant) => (participant.payment ? 1 : 0))

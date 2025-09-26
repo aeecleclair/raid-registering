@@ -1,10 +1,10 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { Participant } from "../api/hyperionSchemas";
+import { RaidParticipant } from "../api/hyperionSchemas";
 
 interface ParticipantStore {
-  participant?: Participant;
-  setParticipant: (participant?: Participant) => void;
+  participant?: RaidParticipant;
+  setParticipant: (participant?: RaidParticipant) => void;
   resetParticipant: () => void;
 }
 
@@ -13,7 +13,7 @@ export const useParticipantStore = create<ParticipantStore>()(
     persist(
       (set) => ({
         participant: undefined,
-        setParticipant: (participant?: Participant) => {
+        setParticipant: (participant?: RaidParticipant) => {
           set({ participant: participant });
         },
         resetParticipant: () => {

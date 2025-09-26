@@ -4,7 +4,10 @@ import {
   usePatchRaidParticipantsParticipantId,
 } from "@/src/api/hyperionComponents";
 import { useQueryClient } from "@tanstack/react-query";
-import { ParticipantBase, ParticipantUpdate } from "../api/hyperionSchemas";
+import {
+  RaidParticipantBase,
+  RaidParticipantUpdate,
+} from "../api/hyperionSchemas";
 import { useParticipantStore } from "../stores/particpant";
 import { useUser } from "./useUser";
 import { useAuth } from "./useAuth";
@@ -48,7 +51,7 @@ export const useParticipant = () => {
   } = usePostRaidParticipants({});
 
   const createParticipant = (
-    participant: ParticipantBase,
+    participant: RaidParticipantBase,
     callback: () => void,
   ) => {
     mutateCreateParticipant(
@@ -90,7 +93,7 @@ export const useParticipant = () => {
   } = usePatchRaidParticipantsParticipantId({});
 
   const updateParticipant = (
-    participant: ParticipantUpdate,
+    participant: RaidParticipantUpdate,
     participantId: string,
     callback: () => void,
   ) => {

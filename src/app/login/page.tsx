@@ -12,7 +12,6 @@ import {
   CardTitle,
 } from "@/src/components/ui/card";
 import MyECLButton from "../../components/login/MyECLButton";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const Login = () => {

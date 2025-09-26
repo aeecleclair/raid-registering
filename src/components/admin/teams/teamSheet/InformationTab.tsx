@@ -1,9 +1,9 @@
 import { Card, CardContent } from "../../../ui/card";
-import { Team } from "@/src/api/hyperionSchemas";
+import { RaidTeam } from "@/src/api/hyperionSchemas";
 import { ParticipantInfoTab } from "./ParticipantInfoTab";
 
 interface InformationTabProps {
-  team: Team;
+  team: RaidTeam;
 }
 
 export const InformationTab = ({ team }: InformationTabProps) => {

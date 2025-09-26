@@ -16,7 +16,6 @@ import { ThemeButton } from "../custom/ThemeButton";
 import { Skeleton } from "../ui/skeleton";
 import { useUser } from "@/src/hooks/useUser";
 import { LogoutButton } from "../home/userSheet/logoutButton";
-import { useTheme } from "next-themes";
 
 export const TopBar = () => {
   const { me } = useUser();

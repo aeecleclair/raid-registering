@@ -1,4 +1,4 @@
-import { Team } from "@/src/api/hyperionSchemas";
+import { RaidTeam } from "@/src/api/hyperionSchemas";
 import { PaymentCardItem } from "./PaymentCardItem";
 import { Card, CardContent } from "../../../ui/card";
 import { toast } from "../../../ui/use-toast";
@@ -7,7 +7,7 @@ import { useAdminTeam } from "@/src/hooks/useAdminTeam";
 import { useTeams } from "@/src/hooks/useTeams";
 
 interface PaymentTabProps {
-  team: Team;
+  team: RaidTeam;
 }
 
 export const PaymentTab = ({ team }: PaymentTabProps) => {

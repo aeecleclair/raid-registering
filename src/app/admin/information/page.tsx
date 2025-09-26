@@ -2,7 +2,6 @@
 
 import { TopBar } from "@/src/components/admin/TopBar";
 import { ContactMail } from "@/src/components/admin/information/ContactMail";
-import { DriveFolder } from "@/src/components/admin/information/DriveFolder";
 import { EmergencyPerson } from "@/src/components/admin/information/EmergencyPersons";
 import { InscriptionEnd } from "@/src/components/admin/information/InscriptionEnd";
 import { RaidDate } from "@/src/components/admin/information/RaidDate";
@@ -25,7 +24,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/src/components/ui/accordion";
-import { PaymentLink } from "@/src/components/admin/information/PayementLink";
 import { RaidExternalPrice } from "@/src/components/admin/information/RaidExternalPrice";
 
 const InformationPage = () => {
@@ -85,7 +83,6 @@ const InformationPage = () => {
                 <AccordionTrigger>Fichiers</AccordionTrigger>
                 <AccordionContent>
                   <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full grid-cols-1 max-md:p-8 max-md:gap-4">
-                    <DriveFolder />
                     {information && <RaidRules information={information} />}
                     {information && (
                       <RaidInformationDocument information={information} />

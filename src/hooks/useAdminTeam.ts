@@ -2,7 +2,6 @@ import { useUser } from "./useUser";
 import {
   useDeleteRaidTeamsTeamId,
   useGetRaidTeamsTeamId,
-  usePostRaidTeamsMerge,
   usePostRaidTeamsTeamIdKickParticipantId,
 } from "../api/hyperionComponents";
 import { useAuth } from "./useAuth";

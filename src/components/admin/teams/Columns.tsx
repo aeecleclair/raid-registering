@@ -2,20 +2,21 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Checkbox } from "../../ui/checkbox";
 import { Badge } from "../../ui/badge";
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
 import { DataTableRowActions } from "./DataTableRowActions";
-import { ParticipantPreview, TeamPreview } from "@/src/api/hyperionSchemas";
+import {
+  RaidParticipantPreview,
+  RaidTeamPreview,
+} from "@/src/api/hyperionSchemas";
 import {
   difficulties,
   getLabelFromValue,
   meetingPlaces,
 } from "@/src/infra/comboboxValues";
-import { CircularProgressBar } from "../../custom/CircularProgressBar";
 import { ProgressBadge } from "../../custom/ProgressBadge";
 
-export const columns: ColumnDef<TeamPreview>[] = [
+export const columns: ColumnDef<RaidTeamPreview>[] = [
   {
     accessorKey: "name",
     header: ({ column }) => (
@@ -31,7 +32,7 @@ export const columns: ColumnDef<TeamPreview>[] = [
       <DataTableColumnHeader column={column} title="Capitaine" />
     ),
     cell: ({ row }) => {
-      const captain = row.getValue("captain") as ParticipantPreview;
+      const captain = row.getValue("captain") as RaidParticipantPreview;
       return (
         <div className="flex space-x-2">
           {captain.firstname} {captain.name}
@@ -46,7 +47,9 @@ export const columns: ColumnDef<TeamPreview>[] = [
       <DataTableColumnHeader column={column} title="Coéquiper" />
     ),
     cell: ({ row }) => {
-      const second = row.getValue("second") as ParticipantPreview | undefined;
+      const second = row.getValue("second") as
+        | RaidParticipantPreview
+        | undefined;
       return (
         <div className={`flex space-x-2 ${second ?? "text-muted-foreground"}`}>
           {second ? `${second.firstname} ${second.name}` : "Non renseigné"}
@@ -125,13 +128,13 @@ export const columns: ColumnDef<TeamPreview>[] = [
     ),
     cell: ({ row }) => {
       const number_of_validated_document =
-        (row.getValue("captain") as ParticipantPreview)
+        (row.getValue("captain") as RaidParticipantPreview)
           .number_of_validated_document +
-        ((row.getValue("second") as ParticipantPreview | null)
+        ((row.getValue("second") as RaidParticipantPreview | null)
           ?.number_of_validated_document ?? 0);
       const number_of_document =
-        (row.getValue("captain") as ParticipantPreview).number_of_document +
-        ((row.getValue("second") as ParticipantPreview | null)
+        (row.getValue("captain") as RaidParticipantPreview).number_of_document +
+        ((row.getValue("second") as RaidParticipantPreview | null)
           ?.number_of_document ?? 0);
       return (
         <ProgressBadge

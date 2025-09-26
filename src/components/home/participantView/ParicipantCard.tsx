@@ -1,4 +1,4 @@
-import { Participant } from "@/src/api/hyperionSchemas";
+import { RaidParticipant } from "@/src/api/hyperionSchemas";
 import {
   Card,
   CardDescription,
@@ -21,7 +21,7 @@ import { ViewEditParticipant } from "./ViewEditParticipant";
 import { useInformation } from "@/src/hooks/useInformation";
 
 interface ParticipantCardProps {
-  participant?: Participant;
+  participant?: RaidParticipant;
   isCaptain: boolean;
 }
 

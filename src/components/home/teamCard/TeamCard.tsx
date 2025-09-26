@@ -1,6 +1,6 @@
 "use client";
 
-import { Team } from "@/src/api/hyperionSchemas";
+import { RaidTeam } from "@/src/api/hyperionSchemas";
 import { Card, CardHeader, CardTitle } from "../../ui/card";
 import { Skeleton } from "../../ui/skeleton";
 import { Button } from "../../ui/button";
@@ -23,7 +23,7 @@ import { useInformation } from "@/src/hooks/useInformation";
 import { formatDateRange, getDaysLeft } from "@/src/utils/dateFormat";
 
 interface TeamCardProps {
-  team?: Team;
+  team?: RaidTeam;
 }
 
 export const TeamCard = ({ team }: TeamCardProps) => {

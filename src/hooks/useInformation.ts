@@ -4,7 +4,6 @@ import {
 } from "@/src/api/hyperionComponents";
 import { RaidInformation } from "../api/hyperionSchemas";
 import { useAuth } from "./useAuth";
-import { toast } from "../components/ui/use-toast";
 
 export const useInformation = () => {
   const { token, userId } = useAuth();

@@ -1,6 +1,5 @@
 import { useGetRaidPrice, usePatchRaidPrice } from "../api/hyperionComponents";
 import { RaidPrice } from "../api/hyperionSchemas";
-import { toast } from "../components/ui/use-toast";
 import { useAuth } from "./useAuth";
 
 export const usePrice = () => {

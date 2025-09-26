@@ -1,5 +1,5 @@
 import {
-  Participant,
+  RaidParticipant,
   Document,
   DocumentValidation,
 } from "@/src/api/hyperionSchemas";
@@ -9,7 +9,7 @@ import { DocumentItem } from "./DocumentItem";
 import { getSituationLabel } from "@/src/infra/teamUtils";
 
 interface ParticipantDocumentCardProps {
-  participant: Participant;
+  participant: RaidParticipant;
   setDocument: (document: Document) => void;
   downloadDocument: (document: Document) => void;
   validateDocument: (

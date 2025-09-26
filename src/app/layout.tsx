@@ -2,30 +2,15 @@
 
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import {
-  QueryCache,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "../components/ui/toaster";
-import { toast } from "../components/ui/use-toast";
 import { Suspense } from "react";
 import { ThemeProvider } from "../components/ui/theme";
 import Script from "next/script";
 
 const inter = Outfit({ subsets: ["latin-ext"] });
 
-const queryClient = new QueryClient({
-  // queryCache: new QueryCache({
-  //   onError: (error) => {
-  //     toast({
-  //       title: "Erreur",
-  //       description: "Une erreur est survenue, veuillez réessayer plus tard",
-  //       variant: "destructive",
-  //     });
-  //   },
-  // }),
-});
+const queryClient = new QueryClient({});
 
 export default function RootLayout({
   children,

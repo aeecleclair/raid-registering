@@ -11,7 +11,7 @@ import { DataTableViewOptions } from "./DataTableViewOptions";
 import { difficulties, meetingPlaces } from "@/src/infra/comboboxValues";
 import { DataTableFilterCheckBox } from "./DataTableFilterCheckBox";
 import { useMergeTeams } from "@/src/hooks/useMergeTeams";
-import { TeamPreview } from "@/src/api/hyperionSchemas";
+import { RaidTeamPreview } from "@/src/api/hyperionSchemas";
 import { LoadingButton } from "../../custom/LoadingButton";
 import { MergeIcon, Trash2Icon } from "lucide-react";
 import { useTeams } from "@/src/hooks/useTeams";
@@ -98,7 +98,7 @@ export function DataTableToolbar<TData>({
                 onClick={() => {
                   const selectedTeams = Object.keys(
                     table.getState().rowSelection,
-                  ).map((key) => table.getRow(key).original as TeamPreview);
+                  ).map((key) => table.getRow(key).original as RaidTeamPreview);
                   const teamIds = selectedTeams.map((team) => team.id);
                   mergeTeams(teamIds[0], teamIds[1], () => {
                     refetchTeams();

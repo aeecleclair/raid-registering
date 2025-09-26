@@ -1,6 +1,6 @@
 import {
-  Participant,
-  ParticipantUpdate,
+  RaidParticipant,
+  RaidParticipantUpdate,
   Size,
 } from "@/src/api/hyperionSchemas";
 import { CardContent } from "../../ui/card";
@@ -15,14 +15,12 @@ import { useParticipant } from "@/src/hooks/useParticipant";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { HiCheck } from "react-icons/hi";
 import { useTeam } from "@/src/hooks/useTeam";
-import { useDocument } from "@/src/hooks/useDocument";
 import { ParticipantField, ValueTypes } from "../../custom/ParticipantField";
 import { getLabelFromValue, situations } from "@/src/infra/comboboxValues";
 import { getSituationLabel, getSituationTitle } from "@/src/infra/teamUtils";
-import { ca } from "date-fns/locale";
 
 interface ViewEditParticipantProps {
-  participant: Participant;
+  participant: RaidParticipant;
   isEdit: boolean;
   setIsEdit: (value: boolean) => void;
 }
@@ -238,7 +236,7 @@ export const ViewEditParticipant = ({
       values.parentAuthorization,
     ].filter((doc) => doc.updated);
 
-    const updatedParticipant: ParticipantUpdate = {
+    const updatedParticipant: RaidParticipantUpdate = {
       bike_size: (values.bikeSize?.toUpperCase() as Size) ?? null,
       t_shirt_size:
         (values.tShirtSize === "no"
@@ -250,7 +248,6 @@ export const ViewEditParticipant = ({
       attestation_on_honour: values.attestationHonour,
     };
     for (const doc of documentToUpdate) {
-      
       switch (doc.type) {
         case "idCard":
           updatedParticipant.id_card_id = doc.id;

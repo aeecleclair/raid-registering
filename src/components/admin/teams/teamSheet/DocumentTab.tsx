@@ -1,7 +1,7 @@
 import {
   DocumentValidation,
-  Participant,
-  Team,
+  RaidParticipant,
+  RaidTeam,
 } from "@/src/api/hyperionSchemas";
 import { Card } from "../../../ui/card";
 import { ParticipantDocumentCard } from "./ParticipantDocumentCard";
@@ -14,7 +14,7 @@ import { toast } from "../../../ui/use-toast";
 import { useTeams } from "@/src/hooks/useTeams";
 
 interface DocumentTabProps {
-  team: Team;
+  team: RaidTeam;
 }
 
 export const DocumentTab = ({ team }: DocumentTabProps) => {
@@ -34,7 +34,7 @@ export const DocumentTab = ({ team }: DocumentTabProps) => {
     setSelectedDocumentUser(userId);
   }
 
-  function downloadDocument(doc: Document, participant: Participant) {
+  function downloadDocument(doc: Document, participant: RaidParticipant) {
     const key = doc.type;
     const file = getDocument(participant.id, key);
     if (file !== undefined) {

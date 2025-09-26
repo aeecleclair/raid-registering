@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, DownloadIcon } from "lucide-react";
 
 import { Button } from "@/src/components/ui/button";
 import {
@@ -18,18 +18,29 @@ import {
   TableRow,
 } from "@/src/components/ui/table";
 import { Skeleton } from "../ui/skeleton";
-import { TeamPreview } from "@/src/api/hyperionSchemas";
+import { RaidTeamPreview } from "@/src/api/hyperionSchemas";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ProgressBadge } from "../custom/ProgressBadge";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/src/components/ui/dropdown-menu";
+import { useTeamFiles } from "@/src/hooks/useTeamFiles";
+import { useSecurityFiles } from "@/src/hooks/useSecurityFiles";
 
 interface TeamsPreviewProps {
-  teams?: TeamPreview[];
+  teams?: RaidTeamPreview[];
   isLoading: boolean;
 }
 
 export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { refetchTeamFiles, isLoading: isTeamFilesLoading } = useTeamFiles();
+  const { refetchSecurityFiles, isLoading: isSecurityFilesLoading } =
+    useSecurityFiles();
 
   function onTeamClick(teamId: string) {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
@@ -48,12 +59,64 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
             de la validation de leur dossier
           </CardDescription>
         </div>
-        <Button asChild size="sm" className="ml-auto gap-1">
-          <Link href="/admin/teams">
-            Voir tout
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-        </Button>
+        <div className="flex gap-2 ml-auto">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button size="sm" variant="outline" className="gap-1">
+                <DownloadIcon className="h-4 w-4" />
+                Télécharger
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem
+                disabled={isTeamFilesLoading}
+                onClick={() => {
+                  refetchTeamFiles().then((response) => {
+                    const teamFiles = response.data;
+                    if (teamFiles instanceof Blob) {
+                      const url = window.URL.createObjectURL(teamFiles);
+                      const a = document.createElement("a");
+                      a.href = url;
+                      a.download = teamFiles.name;
+                      document.body.appendChild(a);
+                      a.click();
+                      a.remove();
+                      window.URL.revokeObjectURL(url);
+                    }
+                  });
+                }}
+              >
+                Fichiers équipes
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                disabled={isSecurityFilesLoading}
+                onClick={() => {
+                  refetchSecurityFiles().then((response) => {
+                    const securityFiles = response.data;
+                    if (securityFiles instanceof Blob) {
+                      const url = window.URL.createObjectURL(securityFiles);
+                      const a = document.createElement("a");
+                      a.href = url;
+                      a.download = securityFiles.name;
+                      document.body.appendChild(a);
+                      a.click();
+                      a.remove();
+                      window.URL.revokeObjectURL(url);
+                    }
+                  });
+                }}
+              >
+                Fiches sécurité
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <Button asChild size="sm" className="gap-1">
+            <Link href="/admin/teams">
+              Voir tout
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
       </CardHeader>
       <CardContent>
         <Table>

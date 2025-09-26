@@ -1,4 +1,4 @@
-import { Team } from "@/src/api/hyperionSchemas";
+import { RaidTeam } from "@/src/api/hyperionSchemas";
 import { CardContent } from "../../ui/card";
 import { Button } from "../../ui/button";
 import { HiCheck } from "react-icons/hi";
@@ -11,7 +11,7 @@ import { useTeam } from "@/src/hooks/useTeam";
 import { toast } from "../../ui/use-toast";
 
 interface TeamCardProps {
-  team?: Team;
+  team?: RaidTeam;
   setIsEdit: (value: boolean) => void;
 }
 

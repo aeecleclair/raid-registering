@@ -11,11 +11,11 @@ import { ChartView } from "./ChartView";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { Switch } from "../ui/switch";
 import { useState } from "react";
-import { TeamPreview } from "@/src/api/hyperionSchemas";
+import { RaidTeamPreview } from "@/src/api/hyperionSchemas";
 import { getStats } from "@/src/infra/statsUtils";
 
 interface StatsViewProps {
-  teams?: TeamPreview[];
+  teams?: RaidTeamPreview[];
   isLoading: boolean;
 }
 

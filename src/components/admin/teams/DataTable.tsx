@@ -28,7 +28,7 @@ import {
   TableRow,
 } from "../../ui/table";
 import { useRouter, useSearchParams } from "next/navigation";
-import { TeamPreview } from "@/src/api/hyperionSchemas";
+import { RaidTeamPreview } from "@/src/api/hyperionSchemas";
 import { toast } from "../../ui/use-toast";
 
 interface DataTableProps<TData, TValue> {
@@ -74,7 +74,7 @@ export function DataTable<TData, TValue>({
 
   function onTeamSelect(row: Row<TData>) {
     if (table.getIsSomeRowsSelected() || table.getIsAllRowsSelected()) {
-      if ((row.original as TeamPreview).second) {
+      if ((row.original as RaidTeamPreview).second) {
         toast({
           title: "Sélection impossible",
           description: "Impossible de fusionner une équipe complète",
@@ -84,7 +84,7 @@ export function DataTable<TData, TValue>({
       row.toggleSelected(!row.getIsSelected());
       return;
     }
-    const id = (row.original as TeamPreview).id;
+    const id = (row.original as RaidTeamPreview).id;
     const current = new URLSearchParams(Array.from(searchParams.entries()));
     current.set("teamId", id);
     const query = current.toString();

@@ -2,7 +2,6 @@ import {
   usePostRaidParticipantParticipantIdPayment,
   usePostRaidParticipantParticipantIdTShirtPayment,
 } from "../api/hyperionComponents";
-import { toast } from "../components/ui/use-toast";
 import { useAuth } from "./useAuth";
 
 export const usePayment = () => {

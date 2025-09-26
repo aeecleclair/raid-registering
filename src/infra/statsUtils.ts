@@ -1,4 +1,4 @@
-import { TeamPreview } from "../api/hyperionSchemas";
+import { RaidTeamPreview } from "../api/hyperionSchemas";
 import { getSituationLabel } from "./teamUtils";
 
 export interface Stats {
@@ -9,7 +9,7 @@ export interface Stats {
   situationData: { value: number; label: string }[];
 }
 
-export function getStats(seeAll: boolean, teams?: TeamPreview[]): Stats {
+export function getStats(seeAll: boolean, teams?: RaidTeamPreview[]): Stats {
   const filteredTeams = teams?.filter(
     (team) => team.validation_progress === 100 || seeAll,
   );
@@ -29,7 +29,7 @@ export function getStats(seeAll: boolean, teams?: TeamPreview[]): Stats {
 
 function getDifficultyData(
   seeAll: boolean,
-  teams?: TeamPreview[],
+  teams?: RaidTeamPreview[],
 ): { value: number; label: string }[] {
   var response = [
     { value: 0, label: "Découverte" },
@@ -59,7 +59,7 @@ function getDifficultyData(
 
 function getMeetingPlaceData(
   seeAll: boolean,
-  teams?: TeamPreview[],
+  teams?: RaidTeamPreview[],
 ): { value: number; label: string }[] {
   var response = [
     { value: 0, label: "Centrale Lyon" },
@@ -95,7 +95,7 @@ function getMeetingPlaceData(
 
 function getBikeSizeData(
   seeAll: boolean,
-  teams?: TeamPreview[],
+  teams?: RaidTeamPreview[],
 ): { value: number; label: string }[] {
   var response = [
     { value: 0, label: "XS" },
@@ -144,7 +144,7 @@ function getBikeSizeData(
 
 function getTShirtSizeData(
   seeAll: boolean,
-  teams?: TeamPreview[],
+  teams?: RaidTeamPreview[],
 ): { value: number; label: string }[] {
   var response = [
     { value: 0, label: "XS" },
@@ -189,7 +189,7 @@ function getTShirtSizeData(
 
 function getSituationData(
   seeAll: boolean,
-  teams?: TeamPreview[],
+  teams?: RaidTeamPreview[],
 ): { value: number; label: string }[] {
   var response = [
     { value: 0, label: "Centrale Lyon" },

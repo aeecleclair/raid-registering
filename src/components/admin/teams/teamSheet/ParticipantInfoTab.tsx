@@ -1,4 +1,4 @@
-import { Participant } from "@/src/api/hyperionSchemas";
+import { RaidParticipant } from "@/src/api/hyperionSchemas";
 import { ParticipantInfo } from "../../../custom/ParticipantInfo";
 import { getSituationLabel, getSituationTitle } from "@/src/infra/teamUtils";
 import { getLabelFromValue, situations } from "@/src/infra/comboboxValues";
@@ -9,18 +9,16 @@ import {
   CardHeader,
   CardTitle,
 } from "../../../ui/card";
-import { format } from "date-fns";
-import { fr } from "date-fns/locale";
 import { formatDate } from "@/src/utils/dateFormat";
 
 interface ParticipantInfoTabProps {
-  participant: Participant;
+  participant: RaidParticipant;
 }
 
 export const ParticipantInfoTab = ({
   participant,
 }: ParticipantInfoTabProps) => {
-  function getSituation(participant: Participant) {
+  function getSituation(participant: RaidParticipant) {
     const situation = getSituationLabel(participant.situation ?? undefined);
     const title = getSituationTitle(participant.situation ?? undefined);
     return (

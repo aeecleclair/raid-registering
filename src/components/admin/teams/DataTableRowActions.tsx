@@ -13,12 +13,12 @@ import {
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
 
-import { HiTrash, HiX } from "react-icons/hi";
+import { HiTrash } from "react-icons/hi";
 import { MergeIcon, UserRoundMinusIcon } from "lucide-react";
 import { WarningDialog } from "../../custom/WarningDialog";
 import { useState } from "react";
 import { useAdminTeam } from "@/src/hooks/useAdminTeam";
-import { TeamPreview } from "@/src/api/hyperionSchemas";
+import { RaidTeamPreview } from "@/src/api/hyperionSchemas";
 import { RemoveMemberDialog } from "./RemoveMemberDialog";
 import { useTeams } from "@/src/hooks/useTeams";
 
@@ -35,7 +35,7 @@ export function DataTableRowActions<TData>({
     kickMember,
     isKickLoading,
     refetchTeam,
-  } = useAdminTeam((row.original as TeamPreview).id);
+  } = useAdminTeam((row.original as RaidTeamPreview).id);
   const { refetchTeams } = useTeams();
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isRemoveMemberDialogOpen, setIsRemoveMemberDialogOpen] =
@@ -47,7 +47,7 @@ export function DataTableRowActions<TData>({
           isOpened={isDeleteDialogOpen}
           setIsOpened={setIsDeleteDialogOpen}
           isLoading={isDeleteLoading}
-          title={`Suppression de l'équipe ${(row.original as TeamPreview).name}`}
+          title={`Suppression de l'équipe ${(row.original as RaidTeamPreview).name}`}
           description="Etes-vous sûr de vouloir supprimer cette équipe ?"
           validateLabel="Supprimer"
           callback={() => {
@@ -64,8 +64,8 @@ export function DataTableRowActions<TData>({
           isOpened={isRemoveMemberDialogOpen}
           setIsOpened={setIsRemoveMemberDialogOpen}
           isLoading={isKickLoading}
-          title={`Retirer un membre de l'équipe ${(row.original as TeamPreview).name}`}
-          team={row.original as TeamPreview}
+          title={`Retirer un membre de l'équipe ${(row.original as RaidTeamPreview).name}`}
+          team={row.original as RaidTeamPreview}
           validateLabel="Retirer"
           callback={(participantId) => {
             kickMember(participantId, () => {

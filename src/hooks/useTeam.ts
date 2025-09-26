@@ -3,7 +3,7 @@ import {
   usePostRaidTeams,
   usePatchRaidTeamsTeamId,
 } from "@/src/api/hyperionComponents";
-import { TeamBase, TeamUpdate } from "../api/hyperionSchemas";
+import { RaidTeamBase, RaidTeamUpdate } from "../api/hyperionSchemas";
 import { useQueryClient } from "@tanstack/react-query";
 import { useUser } from "./useUser";
 import { useAuth } from "./useAuth";
@@ -43,7 +43,7 @@ export const useTeam = () => {
     isPending: isCreationLoading,
   } = usePostRaidTeams({});
 
-  const createTeam = (team: TeamBase, callback: () => void) => {
+  const createTeam = (team: RaidTeamBase, callback: () => void) => {
     mutateCreateTeam(
       {
         body: team,
@@ -82,7 +82,7 @@ export const useTeam = () => {
   const updateTeam = (
     teamId: string,
     callback: () => void,
-    team?: TeamUpdate,
+    team?: RaidTeamUpdate,
   ) => {
     mutateUpdateTeam(
       {

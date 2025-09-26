@@ -3,12 +3,12 @@ import { Card, CardContent } from "../../ui/card";
 import { HiPlus } from "react-icons/hi";
 import { toast } from "../../ui/use-toast";
 import { useInviteToken } from "@/src/hooks/useInviteToken";
-import { Team } from "@/src/api/hyperionSchemas";
+import { RaidTeam } from "@/src/api/hyperionSchemas";
 import { useState } from "react";
 import { LoadingButton } from "../../custom/LoadingButton";
 
 interface EmptyParticipantCardProps {
-  team?: Team;
+  team?: RaidTeam;
 }
 
 export const EmptyParticipantCard = ({ team }: EmptyParticipantCardProps) => {

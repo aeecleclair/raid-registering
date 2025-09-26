@@ -1,10 +1,10 @@
-import { Participant } from "@/src/api/hyperionSchemas";
+import { RaidParticipant } from "@/src/api/hyperionSchemas";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../ui/card";
 import { LoadingButton } from "../../../custom/LoadingButton";
 import { useState } from "react";
 
 interface PaymentCardItemProps {
-  participant: Participant;
+  participant: RaidParticipant;
   validateCallback: (participantId: string, callback: () => void) => void;
   validateTShirtCallback: (participantId: string, callback: () => void) => void;
 }
